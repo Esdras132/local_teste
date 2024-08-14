@@ -1,12 +1,15 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:local_test/test/DrawerNavigation.dart';
+import 'package:local_test/test/RefreshIndicator.dart';
 import 'package:local_test/test/awesome_dialog.dart';
+import 'package:local_test/test/images/cached_network_image.dart';
 import 'package:local_test/test/calendario.dart';
 import 'package:local_test/test/camera.dart';
 import 'package:local_test/test/cep.dart';
 import 'package:local_test/test/conectado.dart';
 import 'package:local_test/test/data.dart';
+import 'package:local_test/test/images/photo_view.dart';
 import 'package:local_test/test/infroma.dart';
 import 'package:local_test/test/menu.dart';
 import 'package:local_test/test/pdf.dart';
@@ -299,39 +302,39 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               child: const Text('Informaçoes do apk'),
             ), 
-                /* TextButton(
+                TextButton(
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const Infor(),
+                    builder: (context) => RefreshIndicatorr(),
                   ),
                 );
               },
-              child: const Text('Informaçoes do apk'),
-            ), */
-                /* TextButton(
+              child: const Text('RefreshIndicator'),
+            ),
+               TextButton(
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const Infor(),
+                    builder: (context) =>  cached_network_image(),
                   ),
                 );
               },
-              child: const Text('Informaçoes do apk'),
-            ), */
-                /* TextButton(
+              child: const Text('cached_network_image'),
+            ),
+             TextButton(
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const Infor(),
+                    builder: (context) => const flutter_image(),
                   ),
                 );
               },
-              child: const Text('Informaçoes do apk'),
-            ), */
+              child: const Text('imagem boa'),
+            ), 
                 /* TextButton(
               onPressed: () {
                 Navigator.push(
