@@ -1,13 +1,18 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
+import 'package:local_test/splash.dart';
 import 'package:local_test/test/DrawerNavigation.dart';
 import 'package:local_test/test/RefreshIndicator.dart';
+import 'package:local_test/test/animated_text_kit.dart';
 import 'package:local_test/test/awesome_dialog.dart';
+import 'package:local_test/test/calendario_text.dart';
+import 'package:local_test/test/carousel_slider.dart';
+import 'package:local_test/test/excel.dart';
 import 'package:local_test/test/images/cached_network_image.dart';
 import 'package:local_test/test/calendario.dart';
 import 'package:local_test/test/camera.dart';
 import 'package:local_test/test/cep.dart';
-import 'package:local_test/test/conectado.dart';
+import 'package:local_test/test/conexao/conectado.dart';
 import 'package:local_test/test/data.dart';
 import 'package:local_test/test/images/photo_view.dart';
 import 'package:local_test/test/infroma.dart';
@@ -20,14 +25,19 @@ import 'package:local_test/test/treispontos.dart';
 import 'package:local_test/test/qrcode.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:local_test/test/webview.dart';
-
+import 'test/conexao/conexao.dart';
 import 'test/login_api.dart';
 import 'test/shared_preferences.dart';
 
 void main() async {
+
+  WidgetsFlutterBinding.ensureInitialized();
+
   await initializeDateFormatting('pt_BR', null);
+
+
   AwesomeNotifications().initialize(
-    null, // Imagem de inicialização padrão
+    null, 
     [
       NotificationChannel(
         channelKey: 'basic_channel',
@@ -40,15 +50,23 @@ void main() async {
     ],
   );
 
-  // Configurar o listener para ações de notificações
   AwesomeNotifications().setListeners(
     onActionReceivedMethod: (receivedNotification) async {
       MyApp.navigatorKey.currentState?.pushNamed('/teste-page');
     },
   );
 
+/*   // Mostrar a Splash Screen
+  Future.microtask(() => runApp(const Splash_Screen()));
+
+  // Aguardar 2 segundos antes de mostrar o app
+  await Future.delayed(const Duration(seconds: 2));
+
+  // Fechar a Splash Screen e mostrar o app */
   runApp(const MyApp());
 }
+
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -285,77 +303,403 @@ class _MyHomePageState extends State<MyHomePage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => PdfOnline(link: 'https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf',),
+                        builder: (context) => PdfOnline(
+                          link:
+                              'https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf',
+                        ),
                       ),
                     );
                   },
                   child: const Text('pdf'),
                 ),
-                 TextButton( 
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const Infor(),
-                  ),
-                );
-              },
-              child: const Text('Informaçoes do apk'),
-            ), 
                 TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const Infor(),
+                      ),
+                    );
+                  },
+                  child: const Text('Informaçoes do apk'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => RefreshIndicatorr(),
+                      ),
+                    );
+                  },
+                  child: const Text('RefreshIndicator'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => cached_network_image(),
+                      ),
+                    );
+                  },
+                  child: const Text('cached_network_image'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const flutter_image(),
+                      ),
+                    );
+                  },
+                  child: const Text('imagem boa'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => animated_text(),
+                      ),
+                    );
+                  },
+                  child: const Text('animated_text_kit'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CarouselDemo(),
+                      ),
+                    );
+                  },
+                  child: const Text('CarouselDemo'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Conexao(),
+                      ),
+                    );
+                  },
+                  child: const Text('conexao'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CalendarioText(),
+                      ),
+                    );
+                  },
+                  child: const Text('DateFormFieldExample'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ExcelExemplo(),
+                      ),
+                    );
+                  },
+                  child: const Text('ExcelExemplo'),
+                ), /* TextButton(
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => RefreshIndicatorr(),
+                    builder: (context) =>  CarouselDemo(),
                   ),
                 );
               },
-              child: const Text('RefreshIndicator'),
-            ),
-               TextButton(
+              child: const Text('CarouselDemo'),
+            ), */ /* TextButton(
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) =>  cached_network_image(),
+                    builder: (context) =>  CarouselDemo(),
                   ),
                 );
               },
-              child: const Text('cached_network_image'),
-            ),
-             TextButton(
+              child: const Text('CarouselDemo'),
+            ), */ /* TextButton(
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const flutter_image(),
+                    builder: (context) =>  CarouselDemo(),
                   ),
                 );
               },
-              child: const Text('imagem boa'),
-            ), 
-                /* TextButton(
+              child: const Text('CarouselDemo'),
+            ), */ /* TextButton(
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const Infor(),
+                    builder: (context) =>  CarouselDemo(),
                   ),
                 );
               },
-              child: const Text('Informaçoes do apk'),
-            ), */
-                /* TextButton(
+              child: const Text('CarouselDemo'),
+            ), */ /* TextButton(
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const Infor(),
+                    builder: (context) =>  CarouselDemo(),
                   ),
                 );
               },
-              child: const Text('Informaçoes do apk'),
+              child: const Text('CarouselDemo'),
+            ), */ /* TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>  CarouselDemo(),
+                  ),
+                );
+              },
+              child: const Text('CarouselDemo'),
+            ), */ /* TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>  CarouselDemo(),
+                  ),
+                );
+              },
+              child: const Text('CarouselDemo'),
+            ), */ /* TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>  CarouselDemo(),
+                  ),
+                );
+              },
+              child: const Text('CarouselDemo'),
+            ), */ /* TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>  CarouselDemo(),
+                  ),
+                );
+              },
+              child: const Text('CarouselDemo'),
+            ), */ /* TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>  CarouselDemo(),
+                  ),
+                );
+              },
+              child: const Text('CarouselDemo'),
+            ), */ /* TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>  CarouselDemo(),
+                  ),
+                );
+              },
+              child: const Text('CarouselDemo'),
+            ), */ /* TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>  CarouselDemo(),
+                  ),
+                );
+              },
+              child: const Text('CarouselDemo'),
+            ), */ /* TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>  CarouselDemo(),
+                  ),
+                );
+              },
+              child: const Text('CarouselDemo'),
+            ), */ /* TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>  CarouselDemo(),
+                  ),
+                );
+              },
+              child: const Text('CarouselDemo'),
+            ), */ /* TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>  CarouselDemo(),
+                  ),
+                );
+              },
+              child: const Text('CarouselDemo'),
+            ), */ /* TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>  CarouselDemo(),
+                  ),
+                );
+              },
+              child: const Text('CarouselDemo'),
+            ), */ /* TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>  CarouselDemo(),
+                  ),
+                );
+              },
+              child: const Text('CarouselDemo'),
+            ), */ /* TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>  CarouselDemo(),
+                  ),
+                );
+              },
+              child: const Text('CarouselDemo'),
+            ), */ /* TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>  CarouselDemo(),
+                  ),
+                );
+              },
+              child: const Text('CarouselDemo'),
+            ), */ /* TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>  CarouselDemo(),
+                  ),
+                );
+              },
+              child: const Text('CarouselDemo'),
+            ), */ /* TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>  CarouselDemo(),
+                  ),
+                );
+              },
+              child: const Text('CarouselDemo'),
+            ), */ /* TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>  CarouselDemo(),
+                  ),
+                );
+              },
+              child: const Text('CarouselDemo'),
+            ), */ /* TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>  CarouselDemo(),
+                  ),
+                );
+              },
+              child: const Text('CarouselDemo'),
+            ), */ /* TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>  CarouselDemo(),
+                  ),
+                );
+              },
+              child: const Text('CarouselDemo'),
+            ), */ /* TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>  CarouselDemo(),
+                  ),
+                );
+              },
+              child: const Text('CarouselDemo'),
+            ), */ /* TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>  CarouselDemo(),
+                  ),
+                );
+              },
+              child: const Text('CarouselDemo'),
+            ), */ /* TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>  CarouselDemo(),
+                  ),
+                );
+              },
+              child: const Text('CarouselDemo'),
+            ), */ /* TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>  CarouselDemo(),
+                  ),
+                );
+              },
+              child: const Text('CarouselDemo'),
+            ), */ /* TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>  CarouselDemo(),
+                  ),
+                );
+              },
+              child: const Text('CarouselDemo'),
             ), */
               ],
             ),

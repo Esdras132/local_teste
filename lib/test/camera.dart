@@ -112,6 +112,6 @@ class _CameraState extends State<Camera> {
 
 
   void shareImage(String imagePath) {
-    Share.shareFiles([imagePath], text: 'Check out this image!');
+    Share.shareXFiles([XFile(imagePath)], text: 'Check out this image!');
   }
 }
